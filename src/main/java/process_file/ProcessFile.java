@@ -18,35 +18,80 @@ import graph.Vertex;
 public class ProcessFile {
 
 	private static BufferedReader br;
-	public static Graph processFile(String filename, String type) {
+	static String matrixType = "matrix";
+	static String rowType = "row";
+	static String spaceSeparator = "space";
+	static String commaSeparator = "comma";
+	
+	public static Graph processFile(String filename, String type, String separator) {
 		Graph graph = new Graph();
 		// initialize some vertices and add them to the graph
 		try {
-		    String path = new File(filename).getAbsolutePath();
+			String path = new File(filename).getAbsolutePath();
 			br = new BufferedReader(new FileReader(path));
 			String line = br.readLine();
-			if (line != null) {
-				String[] verticesNames = line.split(" ");
-				Vertex[] vertices = new Vertex[verticesNames.length];
-				for (int i = 0; i < vertices.length; i++) {
-					vertices[i] = new Vertex(i);
-					graph.addVertex(vertices[i], true);
-				}
-				int currentVertex = 0;
-				while (line != null) {
-					String[] tokens = line.split(" ");
-					for (int i = 0; i < tokens.length; i++) {
-						int currentToken = Integer.parseInt(tokens[i]);
-						if (currentToken == 1) {
-							graph.addEdge(vertices[currentVertex], vertices[i],currentToken);
-						}
+			String[] tokens = null;
+			if(type == matrixType) {
+				String[] verticesNames = null;
+				if (line != null) {
+					if(separator == spaceSeparator) verticesNames = line.split(" ");
+					else if(separator == commaSeparator){
+						String currentline = line.replaceAll("\\s+","");
+						verticesNames = currentline.split(",");
 					}
-					currentVertex++;
-					line = br.readLine();
+					Vertex[] vertices = new Vertex[verticesNames.length];
+					for (int i = 0; i < vertices.length; i++) {
+						vertices[i] = new Vertex(i,i);
+						graph.addVertex(vertices[i], true);
+					}
+					int currentVertex = 0;
+					while (line != null) {
+						if(separator == spaceSeparator){
+							tokens = line.split(" ");
+						} else if(separator == commaSeparator){
+							String currentline = line.replaceAll("\\s+","");
+							tokens = currentline.split(",");
+						}
+						for (int i = 0; i < tokens.length; i++) {
+							int currentToken = Integer.parseInt(tokens[i]);
+							if (currentToken == 1) {
+								graph.addEdge(vertices[currentVertex], vertices[i],currentToken);
+							}
+						}
+						currentVertex++;
+						line = br.readLine();
+					}
 				}
-			}
-			br.close();
-
+				br.close();
+			} else if(type == rowType) {
+				int y = 0;
+				int label = 0;
+				while(line!=null) {
+					String currentline = line.replaceAll("a\\s","");
+					tokens = currentline.split(" ");
+					int potentialVertexnName1 = Integer.parseInt(tokens[y]);
+					int potentialVertexName2 = Integer.parseInt(tokens[y+1]);
+					int potentialEdgeWeight = Integer.parseInt(tokens[y+1]);
+					Vertex vertex1 = graph.getVertexByName(potentialVertexnName1);
+					if(vertex1 == null) {
+						vertex1 = new Vertex(label, potentialVertexnName1);
+						graph.addVertex(vertex1, false);
+						label++;
+					}
+					Vertex vertex2 = graph.getVertexByName(potentialVertexName2);
+					if(vertex2 == null) {
+						vertex2 = new Vertex(label, potentialVertexName2);
+						graph.addVertex(vertex2, false);
+						label++;
+					}
+					
+					if(!graph.isConnected(vertex1, vertex2) && !graph.isConnected(vertex2, vertex1)) {
+						graph.addEdge(vertex1, vertex2, potentialEdgeWeight);
+					}
+					line = br.readLine();							
+				}
+				br.close();
+			}   
 		} catch (FileNotFoundException ex) {
 
 			ex.printStackTrace();

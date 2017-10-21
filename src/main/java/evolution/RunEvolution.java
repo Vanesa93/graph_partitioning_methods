@@ -41,7 +41,7 @@ public class RunEvolution{
     	// size of population
     	populationSize = graph.getVertices().size()/2 ;        
     	 // maximum generation to evolve   	
-    	maxGeneration = 100;          
+    	maxGeneration = 10;          
         // number of Fiduccia Mattheyses locally
         int inFM = 0;                  
         // total number of Fiduccia Mattheyses

@@ -13,7 +13,6 @@ import graph.Graph;
 
 public class Individual implements Cloneable,Comparator<Individual>
 {
-    private String name = "GBP individual";
     private int arraySize = 500;        // The default size of the geno-array
     int[] chromosome;                   // The chromosome: an array of gene 
     private int fitness = 0;            // The value of fitness 

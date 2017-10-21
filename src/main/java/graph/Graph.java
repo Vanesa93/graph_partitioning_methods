@@ -96,6 +96,10 @@ public class Graph {
         return vertices.get(label);
     }
     
+    public Vertex getVertexByName(int vertexName){
+        return namedVertices.get(vertexName);
+    }
+    
     public Vertex getVertexByIndex(int vertexIndex){
         return indexedVertices.get(vertexIndex);
     }     
