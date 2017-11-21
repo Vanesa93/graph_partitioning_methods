@@ -2,6 +2,8 @@ package evolution;
 
 import java.util.*;
 
+import graph.Graph;
+
 /**
  *   An implentation of the selection, replacement and recombination functions 
  *   needed for evolution
@@ -37,7 +39,7 @@ public class Evolution{
         int genoSize = ind1.getArraySize();     // Size of the genes
         int[] newGenes = new int[genoSize];     // new genes to return
         LinkedList<Integer> mismatch = new LinkedList<Integer>();
-        
+
         // Check hamming distance: For GBP, 0011 and 1100 represent the same partitioning
         checkHamming(ind1, ind2);
         

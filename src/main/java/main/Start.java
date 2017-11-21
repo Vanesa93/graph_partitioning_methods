@@ -15,12 +15,13 @@ public class Start {
 	static String commaSeparator = "comma";
 	
 	public static void main(String[] args){
-		 String filename = "gC.txt";
-		 Graph graph = ProcessFile.processFile(filename, matrixType, spaceSeparator);
-		 runKernighanLin(graph);	 
-		 runFiducciaMattheyses(graph);	
+		 String filename = "graph5Vertices.txt";
+		 Graph graph = ProcessFile.processFile(filename, matrixType, commaSeparator);
+//		 runKernighanLin(graph);	 
+//		 runFiducciaMattheyses(graph);	
 		 runNaiveApproach(graph);
 		 runEvolution(graph);
+		 graph = null;
 	 }  
 	
 	 public static void runKernighanLin(Graph graph){
@@ -55,7 +56,7 @@ public class Start {
 		 System.out.print(" \n");
 	 }
 	 
-	 public static void runEvolution(Graph graph){
+	 public static void runEvolution(Graph graph) {
 		 Runtime runtime = Runtime.getRuntime();
 		 long usedMemoryBefore = runtime.totalMemory() - runtime.freeMemory();
 		 System.out.println("Used Memory before" + usedMemoryBefore);
