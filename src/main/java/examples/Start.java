@@ -1,11 +1,21 @@
-package main;
+package examples;
 
-import algorithms.FiducciaMattheysesAlgorithm;
-import algorithms.KernighanLinAlgorithm;
-import graph.Graph;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import classic_algorithms.FiducciaMattheysesAlgorithm;
+import classic_algorithms.KernighanLinAlgorithm;
+import entity.Graph;
+import evolutionary_approach.EvolutionaryApproach;
 import naive_approach.NaiveApproach;
-import process_file.ProcessFile;
-import evolution.RunEvolution;
+import helpers.ObjectToJson;
+import helpers.ProcessFile;
 
 public class Start {
 
@@ -14,17 +24,20 @@ public class Start {
 	static String spaceSeparator = "space";
 	static String commaSeparator = "comma";
 	
-	public static void main(String[] args){
-		 String filename = "graph5Vertices.txt";
-		 Graph graph = ProcessFile.processFile(filename, matrixType, commaSeparator);
+	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException{
+		 String filename = "graph.txt";
+		 Graph graph = ProcessFile.processFile(filename, matrixType, commaSeparator, "");
+		 ObjectToJson.convertObjectToJson("D:\\saved\\staff.json", graph);
+
 //		 runKernighanLin(graph);	 
 //		 runFiducciaMattheyses(graph);	
-		 runNaiveApproach(graph);
-		 runEvolution(graph);
-		 graph = null;
+//		 runNaiveApproach(graph);
+//		 runEvolution(graph);
+//		 graph = null;
 	 }  
 	
 	 public static void runKernighanLin(Graph graph){
+		 System.out.println("Kernighan Lin");
 		 Runtime runtime = Runtime.getRuntime();
 		 long usedMemoryBefore = runtime.totalMemory() - runtime.freeMemory();
 		 System.out.println("Used Memory before" + usedMemoryBefore);
@@ -61,7 +74,7 @@ public class Start {
 		 long usedMemoryBefore = runtime.totalMemory() - runtime.freeMemory();
 		 System.out.println("Used Memory before" + usedMemoryBefore);
 		 long startTimeRE = System.currentTimeMillis();
-		 new RunEvolution(graph);
+		 new EvolutionaryApproach(graph);
 		 long endTimeRE = System.currentTimeMillis();
 		 System.out.print(" \n");
 		 double time_seconds = (endTimeRE-startTimeRE) / 1000.0;   // add the decimal
@@ -79,7 +92,12 @@ public class Start {
 		 long usedMemoryBefore = runtime.totalMemory() - runtime.freeMemory();
 		 System.out.println("Used Memory before" + usedMemoryBefore);
 		 long startTimeNA = System.currentTimeMillis();
-		 new NaiveApproach(graph);
+		 try {
+			new NaiveApproach(graph);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 long endTimeNA = System.currentTimeMillis();
 		 System.out.print(" \n");
 		 double time_seconds = (endTimeNA-startTimeNA) / 1000.0;   // add the decimal

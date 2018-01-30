@@ -1,12 +1,14 @@
-package algorithms;
+package classic_algorithms;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
-import graph.Edge;
-import graph.Graph;
-import graph.Vertex;
-import graph.VertexGroup;
+
+import entity.Edge;
+import entity.Graph;
+import entity.Vertex;
+import entity.VertexGroup;
 
 /**
  * An implentation of the Fiduccia Mattheyses Algorithm
@@ -15,7 +17,7 @@ import graph.VertexGroup;
  *
  */
 
-public class FiducciaMattheysesAlgorithm {
+public class FiducciaMattheysesAlgorithm implements IFiducciaMattheysesAlgorithm {
 
 	/** Performs FiducciaMattheyses on the given graph **/
 	public FiducciaMattheysesAlgorithm(Graph graph) {
@@ -56,7 +58,7 @@ public class FiducciaMattheysesAlgorithm {
 	// vertex group with all unlocked vertices
 	private static VertexGroup unLockedVertices;
 	
-	private void processGraph(Graph g) {
+	public void processGraph(Graph g) {
 		// initialize variables
 		this.graph = g;
 		this.partitionSize = g.getVertices().size() / 2;
@@ -81,7 +83,7 @@ public class FiducciaMattheysesAlgorithm {
 		setBestPartiton();
 	}
 	
-	private void setInitialPartition(Graph g){
+	public void setInitialPartition(Graph g){
 		int i = 0;
 		for (Vertex v : g.getVertices()) {			
 			(++i > partitionSize ? bucketB : bucketA).add(v);
@@ -96,12 +98,16 @@ public class FiducciaMattheysesAlgorithm {
 		}	
 	}
 	
-	private Stream<Entry<Integer, Double>> sortVerticesByCost(){
-		Stream<Entry<Integer, Double>> sortedMap = vertexCostLabelMap.entrySet().stream().sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()));
+	public Stream<Entry<Integer, Double>> sortVerticesByCost(){
+		Stream<Entry<Integer, Double>> sortedMap = vertexCostLabelMap.entrySet().stream().sorted(new Comparator<Entry<Integer, Double>>() {
+			public int compare(Entry<Integer, Double> k1, Entry<Integer, Double> k2) {
+				return -k1.getValue().compareTo(k2.getValue());
+			}
+		});
 		return sortedMap;
 	}
 	
-	private void doAllSwaps() {
+	public void doAllSwaps() {
 		for(int y=0;y<unLockedVertices.size();y++){			
 			for (Vertex v: unLockedVertices) {
 				double currentCost = getVertexCost(v);
@@ -117,7 +123,7 @@ public class FiducciaMattheysesAlgorithm {
 		}
 	}
 	
-	private void setVertexToMove(){		
+	public void setVertexToMove(){		
 		for(int i = 0; i< vertexCostLabelMap.size(); i++){
 			Stream<Entry<Integer, Double>> orderedMap = sortVerticesByCost();
 			Vertex v = this.graph.getVertex(orderedMap.findFirst().get().getKey());
@@ -134,14 +140,22 @@ public class FiducciaMattheysesAlgorithm {
 		}	
 	}
 	
-	private void setBestPartiton() {
-		Stream<Entry<Double, VertexGroup>> sortedmaxCostA = maxCostA.entrySet().stream().sorted((k1, k2) -> -k1.getKey().compareTo(k2.getKey()));
-		Stream<Entry<Double, VertexGroup>> sortedmaxCostB = maxCostB.entrySet().stream().sorted((k1, k2) -> -k1.getKey().compareTo(k2.getKey()));
+	public void setBestPartiton() {
+		Stream<Entry<Double, VertexGroup>> sortedmaxCostA = maxCostA.entrySet().stream().sorted(new Comparator<Entry<Double, VertexGroup>>() {
+			public int compare(Entry<Double, VertexGroup> k1, Entry<Double, VertexGroup> k2) {
+				return -k1.getKey().compareTo(k2.getKey());
+			}
+		});
+		Stream<Entry<Double, VertexGroup>> sortedmaxCostB = maxCostB.entrySet().stream().sorted(new Comparator<Entry<Double, VertexGroup>>() {
+			public int compare(Entry<Double, VertexGroup> k1, Entry<Double, VertexGroup> k2) {
+				return -k1.getKey().compareTo(k2.getKey());
+			}
+		});
 		partitionA = sortedmaxCostA.findFirst().get().getValue();
 		partitionB = sortedmaxCostB.findFirst().get().getValue();
 	}
 
-	private void setGain(final Vertex vertexToMove){
+	public void setGain(final Vertex vertexToMove){
 		VertexGroup currentPart = bucketA.contains(vertexToMove) ? bucketA : bucketB;
 		VertexGroup oppositePart = bucketA.contains(vertexToMove) ? bucketB : bucketA;
 		double currentPartitionBalance = 0;
@@ -162,7 +176,7 @@ public class FiducciaMattheysesAlgorithm {
 		}
 	}
 	
-	private void swapVertex(Vertex vertexToMove){
+	public void swapVertex(Vertex vertexToMove){
 		if (bucketA.contains(vertexToMove)) {
 			bucketA.remove(vertexToMove);
 			bucketB.add(vertexToMove);
@@ -179,7 +193,7 @@ public class FiducciaMattheysesAlgorithm {
 	 * group A, all internal edges become external edges and vice versa.
 	 **/
 	
-	private double getVertexCost(Vertex v) {
+	public double getVertexCost(Vertex v) {
 	//  the moving force FS(c) is the number of nets connected 
 	//	to c but not connected to any other cells within c’s partition, 
 	//	i.e., cut nets that connect only to c, and 

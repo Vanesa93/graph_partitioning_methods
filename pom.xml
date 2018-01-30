@@ -19,10 +19,15 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+						<archive>
+						  <manifest>
+							<mainClass>examples.Start</mainClass>
+						  </manifest>
+						</archive>
                             <transformers>
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>main.Start</mainClass>
+                                    <mainClass>examples.Start</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -31,4 +36,11 @@
             </plugin>
         </plugins>
     </build>
+	 <dependencies>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.10</version>
+		</dependency>
+	</dependencies>
 </project>

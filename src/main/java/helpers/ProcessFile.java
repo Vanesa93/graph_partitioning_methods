@@ -1,12 +1,13 @@
-package process_file;
+package helpers;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import graph.Graph;
-import graph.Vertex;
+
+import entity.Graph;
+import entity.Vertex;
 
 /**
  * An implentation of process file class
@@ -23,11 +24,12 @@ public class ProcessFile {
 	static String spaceSeparator = "space";
 	static String commaSeparator = "comma";
 	
-	public static Graph processFile(String filename, String type, String separator) {
+	public static Graph processFile(String filename, String type, String separator,  String path) {
 		Graph graph = new Graph();
 		// initialize some vertices and add them to the graph
 		try {
-			String path = new File(filename).getAbsolutePath();
+			// Start reading file
+			path = path == "" ? new File(filename).getAbsolutePath() : path;
 			br = new BufferedReader(new FileReader(path));
 			String line = br.readLine();
 			String[] tokens = null;

@@ -1,8 +1,9 @@
-package evolution;
+package evolutionary_approach;
 
 import java.util.*;
 
-import graph.Graph;
+import entity.Graph;
+import entity.Individual;
 
 
 /**
@@ -12,7 +13,7 @@ import graph.Graph;
  *
  */
 
-public class EvolutionaryFiducciaMattheysesAlgorithm{
+public class EvolutionaryFiducciaMattheysesAlgorithm implements IEvolutionaryFiducciaMattheysesAlgorithm{
     private Graph graph;                       
     private Individual oriInd, newInd;          
     private int[] unLockedVertices;                     
@@ -178,7 +179,7 @@ public class EvolutionaryFiducciaMattheysesAlgorithm{
         }
     }
 
-	private int getGain( final int index, final Individual curInd ) {
+	public int getGain( final int index, final Individual curInd ) {
         Individual tmpInd = new Individual(curInd);
         int[] tmpGenes = copyArray(tmpInd.getGenes());
         tmpGenes[index] = flipNode(tmpGenes[index]);          
@@ -187,11 +188,11 @@ public class EvolutionaryFiducciaMattheysesAlgorithm{
         return gain;
 	}
 
-    private int flipNode(int group){
+    public int flipNode(int group){
         return (-1*group+1);
     }
 
-    private void findMaxGain(final Individual ind){
+    public void findMaxGain(final Individual ind){
         int verticesSize = graph.getVertices().size();         
         int[] tmpGenes = ind.getGenes();
         maxGain0 = -1*maxDegree;
@@ -221,7 +222,7 @@ public class EvolutionaryFiducciaMattheysesAlgorithm{
         <0 : partition '0' have more nodes   
         =0 : balanced                             
      **/
-    private int getBalance(final int[] curPart){
+    public int getBalance(final int[] curPart){
         int bal = 0 - (curPart.length/2);         // Start from -1*(half of nodes)
         for(int i = 0; i < curPart.length; i++){
             bal+=curPart[i];                      
@@ -229,7 +230,7 @@ public class EvolutionaryFiducciaMattheysesAlgorithm{
         return bal;
     }
 
-    private boolean allNodesLocked(final int[] curPart){
+    public boolean allNodesLocked(final int[] curPart){
         int sum0 = 0;
         for(int i = 0; i < unLockedVertices.length; i++){
             sum0 += unLockedVertices[i];               
@@ -237,14 +238,14 @@ public class EvolutionaryFiducciaMattheysesAlgorithm{
         return ((sum0 == 0));
     }
 
-	private int [] copyArray( int [] source ) {
+	public int [] copyArray( int [] source ) {
 		int [] result = new int[ source.length ];
 		for( int i = 0; i < result.length; i++ )
 			result[ i ] = source[ i ];
 		return result;
 	}
 
-    private int findMaxDegree(){
+    public int findMaxDegree(){
         int maxDegree = 0;                            
         for (int i = 0; i < graph.getVertices().size(); i++){
             int nNeighbors = graph.getVertex(i).getNeighborCount();

@@ -1,4 +1,4 @@
-package graph;
+package entity;
 
 /**
  * An implentation of the Graph Edge
@@ -18,7 +18,9 @@ public class Edge implements Comparable<Edge> {
      */
 
     public Edge(Vertex one, Vertex two){
-        this(one, two, 1);
+    	this(one, two, 1);
+    	this.one = one;
+    	this.two = two;        
     } 
 
     /**

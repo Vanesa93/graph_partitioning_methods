@@ -1,8 +1,6 @@
-package evolution;
+package entity;
 
 import java.util.*;
-
-import graph.Graph;
 
 /**
  * An implentation of Individual used for evolutionary approach
@@ -13,11 +11,11 @@ import graph.Graph;
 
 public class Individual implements Cloneable,Comparator<Individual>
 {
-    private int arraySize = 500;        // The default size of the geno-array
-    int[] chromosome;                   // The chromosome: an array of gene 
-    private int fitness = 0;            // The value of fitness 
-    private boolean evaluated = false;  // The flag indicate if this individual is evaluated
-    private Graph graph;                 // The graph definition
+    public int arraySize = 500;        // The default size of the geno-array
+    public int[] chromosome;                   // The chromosome: an array of gene 
+    public int fitness = 0;            // The value of fitness 
+    public boolean evaluated = false;  // The flag indicate if this individual is evaluated
+    public Graph graph;                 // The graph definition
 
     public Individual(final int size, final Graph gbp){
         arraySize = size;

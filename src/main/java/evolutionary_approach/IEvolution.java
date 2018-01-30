@@ -15,11 +15,11 @@ import entity.Individual;
 
 public interface IEvolution {
 
-    Individual[] randSelection(final Individual[] pop);
+    Individual[] randomSelection(final Individual[] pop);
     int[] uniformCrossover(final Individual ind1, final Individual ind2);
     void replaceWorst(final Individual ind, final Individual[] pop);
     int [] copyArray( int [] source );
-    void checkHamming(final Individual ind1, final Individual ind2);
+    void checkHammingDistance(final Individual ind1, final Individual ind2);
     int [] flipArray( int [] source );
     void randPermute( int[] a );
 }

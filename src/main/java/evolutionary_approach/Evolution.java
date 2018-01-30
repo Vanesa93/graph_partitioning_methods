@@ -1,8 +1,9 @@
-package evolution;
+package evolutionary_approach;
 
 import java.util.*;
 
-import graph.Graph;
+import entity.Graph;
+import entity.Individual;
 
 /**
  *   An implentation of the selection, replacement and recombination functions 
@@ -12,11 +13,11 @@ import graph.Graph;
  *
  */
 
-public class Evolution{
+public class Evolution implements IEvolution{
 
 	// Selection
     /** Randomly Select 2 parents from the given population **/
-    public Individual[] randSelection(final Individual[] pop){
+    public Individual[] randomSelection(final Individual[] pop){
         // Generate 2 random index numbers from given population
         Random rand = new Random();
         int pSize = pop.length;
@@ -41,7 +42,7 @@ public class Evolution{
         LinkedList<Integer> mismatch = new LinkedList<Integer>();
 
         // Check hamming distance: For GBP, 0011 and 1100 represent the same partitioning
-        checkHamming(ind1, ind2);
+        checkHammingDistance(ind1, ind2);
         
         // Check exception
         if(genoSize!=ind2.getArraySize()){
@@ -81,7 +82,7 @@ public class Evolution{
     }
 
     /** Copy an integer array by values **/ 
-	private int [] copyArray( int [] source ) {
+	public int [] copyArray( int [] source ) {
 		int [] result = new int[ source.length ];
 		for( int i = 0; i < result.length; i++ )
 			result[ i ] = source[ i ];
@@ -89,7 +90,7 @@ public class Evolution{
 	}
     
     /** check hamming distance **/ 
-	private void checkHamming(final Individual ind1, final Individual ind2) {
+	public void checkHammingDistance(final Individual ind1, final Individual ind2) {
 		int hammingDistance = 0;
         int[] a1 = copyArray(ind1.getGenes());
         int[] a2 = copyArray(ind2.getGenes());
@@ -107,7 +108,7 @@ public class Evolution{
 	}
 
     /** Reverse the values of a bit string **/ 
-	private int [] flipArray( int [] source ) {
+	public int [] flipArray( int [] source ) {
 		int [] result = new int[ source.length ];
 		for( int i = 0; i < result.length; i++ )
 			result[ i ] = (-1 * source[ i ]) + 1;
@@ -115,7 +116,7 @@ public class Evolution{
 	}
 
     /** Perform random permutation on an integer array **/ 
-	private void randPermute( int[] a ) {
+	public void randPermute( int[] a ) {
         Random rand = new Random();
         for(int i = 0; i < (a.length-1); i++){
             int j = rand.nextInt((a.length-i)) + i;

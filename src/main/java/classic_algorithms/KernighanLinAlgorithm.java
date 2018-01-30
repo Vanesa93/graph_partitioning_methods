@@ -1,11 +1,11 @@
-package algorithms;	
+package classic_algorithms;	
 
 import java.util.LinkedList;
 
-import graph.Edge;
-import graph.Graph;
-import graph.Vertex;
-import graph.VertexGroup;
+import entity.Edge;
+import entity.Graph;
+import entity.Vertex;
+import entity.VertexGroup;
 
 /**
  * Kernighan-Lin - splitting a graph into 
@@ -14,7 +14,7 @@ import graph.VertexGroup;
  *
  */
 
-public class KernighanLinAlgorithm {
+public class KernighanLinAlgorithm implements IKernighanLinAlgorithm {
   
   private static VertexGroup partitionA;
   private static VertexGroup partitionB;
@@ -54,7 +54,7 @@ public class KernighanLinAlgorithm {
   }
   
   /** Performs swaps(half of graph vertices) and chooses the one with least cut cost one **/
-  private void doAllSwaps() {
+  public void doAllSwaps() {
 
     LinkedList<Edge> swaps = new LinkedList<Edge>();
     double minCost = Double.POSITIVE_INFINITY;
@@ -76,7 +76,7 @@ public class KernighanLinAlgorithm {
   }
   
   /** Chooses the least cost swap and performs it **/
-  private double doSingleSwap(LinkedList<Edge> swaps) {
+  public double doSingleSwap(LinkedList<Edge> swaps) {
    
     Edge maxPair = null;
     double maxGain = Double.NEGATIVE_INFINITY;    
@@ -105,7 +105,7 @@ public class KernighanLinAlgorithm {
   /** Returns the difference of external cost and internal cost of this vertex.
    *  When moving a vertex from within group A, all internal edges become external 
    *  edges and the opposite **/
-  private double getVertexCost(Vertex v) {
+  public double getVertexCost(Vertex v) {
     
     double cost = 0;
 
@@ -136,7 +136,7 @@ public class KernighanLinAlgorithm {
   }
   
   /** Swaps va and vb in groups a and b **/
-  private static void swapVertices(VertexGroup a, Vertex va, VertexGroup b, Vertex vb) {
+  public void swapVertices(VertexGroup a, Vertex va, VertexGroup b, Vertex vb) {
     if (!a.contains(va) || a.contains(vb) ||
         !b.contains(vb) || b.contains(va)) throw new RuntimeException("Invalid swap");
     a.remove(va); a.add(vb);

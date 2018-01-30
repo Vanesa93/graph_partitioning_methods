@@ -1,7 +1,8 @@
-package evolution;
+package evolutionary_approach;
 
-import graph.Graph;
-import graph.VertexGroup;
+import entity.Graph;
+import entity.Individual;
+import entity.VertexGroup;
 
 
 /**
@@ -13,15 +14,18 @@ import graph.VertexGroup;
  *
  */
 
-public class RunEvolution{
+public class EvolutionaryApproach implements IEvolutionaryApproach{
     private Graph graph;
 	private int populationSize;
 	private int verticesCount;
 	private int maxGeneration;
 	public VertexGroup partition1;
 	public VertexGroup partition2;
-	
-	public RunEvolution(Graph g){
+    int max = -99999;                   // Max fitness of a generation
+    int min = 99999;                    // Min fitness of a generation
+    double mean = 0.0;                  // Mean fitness of a generation
+    
+	public EvolutionaryApproach(Graph g){
         processGraph(g);
     	System.out.print("Evolutionary Fiduccia Mattheysis algorithm");
         System.out.print(" \n");
@@ -42,9 +46,9 @@ public class RunEvolution{
     	populationSize = graph.getVertices().size()/2 ;  
     	String[] genOut = new String[4];    // For output
         //  Initialize statistics
-        int max = -99999;                   // Max fitness of a generation
-        int min = 99999;                    // Min fitness of a generation
-        double mean = 0.0;                  // Mean fitness of a generation
+//        int max = -99999;                   // Max fitness of a generation
+//        int min = 99999;                    // Min fitness of a generation
+//        double mean = 0.0;                  // Mean fitness of a generation
     	 // maximum generation to evolve   	
     	maxGeneration = 100;          
         // number of Fiduccia Mattheyses locally
@@ -55,7 +59,7 @@ public class RunEvolution{
         // Initialize population with Fiduccia Mattheyses
         Individual[] population = new Individual[populationSize];
         for (int i = 0; i <  populationSize; i++){
-            population[i] = iterKLFM(new Individual(verticesCount,graph));
+            population[i] = iterateKLFM(new Individual(verticesCount,graph));
 //            inFM = iterKLFM(population[i]);
 //            outFM = outFM + inFM;
         }  
@@ -65,7 +69,7 @@ public class RunEvolution{
         {
             Evolution evolution = new Evolution();
             // Random selection
-            Individual[] parents = evolution.randSelection(population);
+            Individual[] parents = evolution.randomSelection(population);
             // Generate off-spring with uniform crossover
             Individual offspring = new Individual(parents[0]);
             offspring.setGenes(evolution.uniformCrossover(parents[0], parents[1]));
@@ -74,7 +78,7 @@ public class RunEvolution{
 //            outFM = outFM + inFM;
             // Replace the worst case in the old population
             evolution.replaceWorst(offspring,population);
-            offspring = iterKLFM(new Individual(offspring));
+            offspring = iterateKLFM(new Individual(offspring));
             // Increment generation
             generation++;
             genOut = (calStat(population));
@@ -103,7 +107,7 @@ public class RunEvolution{
     }
 
     /** Iterative Fiduccia Mattheyses until no improvement **/
-    public Individual iterKLFM(final Individual ind){
+    public Individual iterateKLFM(final Individual ind){
         int countFM = 0;
         Individual tempInd = new Individual(ind);
         EvolutionaryFiducciaMattheysesAlgorithm fm = new EvolutionaryFiducciaMattheysesAlgorithm(graph,ind);
@@ -143,10 +147,10 @@ public class RunEvolution{
         3 - mean fitness                **/
     public String[] calStat(final Individual[] pop){
         // Initialze statistics
-        int max = -99999;
-        int min = 99999;
+//        int max = -99999;
+//        int min = 99999;
         int sum = 0;
-        double mean = 0.0;
+//        double mean = 0.0;
         String[] output = new String[4];
 
         // Calculateion

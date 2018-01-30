@@ -1,4 +1,4 @@
-package graph;
+package entity;
 
 import java.util.*;
 

@@ -3,6 +3,7 @@ package naive_approach;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -156,7 +157,7 @@ public class NaiveApproach implements INaiveApproach
 			for(int y = 0;y<currentVertexGroup.size()-1;y++){
 				Vertex root = graph.getVertex(currentVertexGroup.get(y));
 				Vertex end = graph.getVertex(currentVertexGroup.get(y+1));
-				serialize_using_bfs(root, end);
+				serializeUsingBfs(root, end);
 				currentPath.clear();
 			}
 			for(int y=0;y<allCurentPaths.size();y++){
@@ -177,7 +178,7 @@ public class NaiveApproach implements INaiveApproach
 		
 		// if there is only one group lefr
 		if(potentialPartitionA.size() == 1){
-			int index = (int) potentialPartitionA.keySet().toArray()[0];
+			int index = (Integer) potentialPartitionA.keySet().toArray()[0];
 			ArrayList<Integer> partitionGroupA = new ArrayList<Integer>(potentialPartitionA.get(index));
 			ArrayList<Integer> partitionGroupB = new ArrayList<Integer>(potentialPartitionB.get(index));	
 			for(int y = 0;y<partitionGroupA.size();y++){
@@ -187,7 +188,7 @@ public class NaiveApproach implements INaiveApproach
 		} else {
 			 maxGain = new HashMap<Integer, Double>();
 			 for(int i = 0; i< potentialPartitionA.size() & !potentialPartitionA.isEmpty();i++){	
-				int index = (int) potentialPartitionA.keySet().toArray()[i];
+				int index = (Integer) potentialPartitionA.keySet().toArray()[i];
 				ArrayList<Integer> currentPartitionA = potentialPartitionA.get(index);
 				ArrayList<Integer> currentPartitionB = potentialPartitionB.get(index);
 				double currentPartitionGain = 0;
@@ -198,7 +199,11 @@ public class NaiveApproach implements INaiveApproach
 				}
 				maxGain.put(index, currentPartitionGain);
 			}	
-			Stream<Entry<Integer, Double>> sortedMap = maxGain.entrySet().stream().sorted((k1, k2) -> -k1.getValue().compareTo(k2.getValue()));
+			Stream<Entry<Integer, Double>> sortedMap = maxGain.entrySet().stream().sorted(new Comparator<Entry<Integer, Double>>() {
+				public int compare(Entry<Integer, Double> k1, Entry<Integer, Double> k2) {
+					return -k1.getValue().compareTo(k2.getValue());
+				}
+			});
 	        int bestPartitionIndex = sortedMap.findFirst().get().getKey();
 	    	ArrayList<Integer> partitionGroupA = new ArrayList<Integer>(potentialPartitionA.get(bestPartitionIndex));
 			ArrayList<Integer> partitionGroupB = new ArrayList<Integer>(potentialPartitionB.get(bestPartitionIndex));	
@@ -223,9 +228,9 @@ public class NaiveApproach implements INaiveApproach
 		return currentVertexGain;
 	}
 	
-	public void serialize_using_bfs(Vertex root, Vertex end) {
+	public void serializeUsingBfs(Vertex root, Vertex end) {
         // BFS uses Queue
-        Queue<Vertex> queue = new LinkedList<>();
+        Queue<Vertex> queue = new LinkedList<Vertex>();
         queue.add(root);
     	Vertex node = root;  
         while (!queue.isEmpty()) {
@@ -241,7 +246,7 @@ public class NaiveApproach implements INaiveApproach
 	public Vertex getUnvisitedChildNode(Vertex node, Vertex end, Queue<Vertex> queue) {
 		ArrayList<Vertex> allNeighbors = node.neighborhoodVertices;
 		if(allNeighbors.contains(end)){
-			Queue<Vertex> pathToAdd = new LinkedList<>(queue);
+			Queue<Vertex> pathToAdd = new LinkedList<Vertex>(queue);
 			queue.add(end);
 			allCurentPaths.add(pathToAdd);
 			clearQueue(queue);
@@ -257,7 +262,7 @@ public class NaiveApproach implements INaiveApproach
     }
 	
 	public void clearQueue(Queue<Vertex> queue){
-		currentPath = new LinkedList<>(queue);
+		currentPath = new LinkedList<Vertex>(queue);
 		setAllVerticesUnvisited();
 		queue.clear();
 	}
