@@ -14,8 +14,8 @@ import classic_algorithms.KernighanLinAlgorithm;
 import entity.Graph;
 import evolutionary_approach.EvolutionaryApproach;
 import naive_approach.NaiveApproach;
-import helpers.ObjectToJson;
 import helpers.ProcessFile;
+import jsonConverter.ObjectToJson;
 
 public class Start {
 
@@ -27,13 +27,12 @@ public class Start {
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException{
 		 String filename = "graph.txt";
 		 Graph graph = ProcessFile.processFile(filename, matrixType, commaSeparator, "");
-		 ObjectToJson.convertObjectToJson("D:\\saved\\staff.json", graph);
-
-//		 runKernighanLin(graph);	 
-//		 runFiducciaMattheyses(graph);	
-//		 runNaiveApproach(graph);
-//		 runEvolution(graph);
-//		 graph = null;
+//		 ObjectToJson.convertObjectToJson("D:\\saved\\", filename,  graph);
+		 runKernighanLin(graph);	 
+		 runFiducciaMattheyses(graph);	
+		 runNaiveApproach(graph);
+		 runEvolution(graph);
+		 graph = null;
 	 }  
 	
 	 public static void runKernighanLin(Graph graph){
