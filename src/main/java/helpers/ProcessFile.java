@@ -57,7 +57,7 @@ public class ProcessFile {
 						for (int i = 0; i < tokens.length; i++) {
 							int currentToken = Integer.parseInt(tokens[i]);
 							if (currentToken == 1) {
-								graph.addEdge(vertices[currentVertex], vertices[i],currentToken);
+								graph.addEdge(vertices[currentVertex], vertices[i],currentToken, false);
 							}
 						}
 						currentVertex++;
@@ -88,7 +88,7 @@ public class ProcessFile {
 					}
 					
 					if(!graph.isConnected(vertex1, vertex2) && !graph.isConnected(vertex2, vertex1)) {
-						graph.addEdge(vertex1, vertex2, potentialEdgeWeight);
+						graph.addEdge(vertex1, vertex2, potentialEdgeWeight, false);
 					}
 					line = br.readLine();							
 				}

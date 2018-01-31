@@ -41,7 +41,7 @@ public class ObjectToJson {
 			StringWriter stringWriter = new StringWriter();
 			JsonGraph jsonGraph = new JsonGraph(verticesList, edgesList);
 			mapperObj.writeValue(stringWriter, jsonGraph);
-			System.out.println(stringWriter.toString());
+//			System.out.println(stringWriter.toString());
 			mapperObj.writeValue(new File(pathToSave + filename), jsonGraph);			
 				
 		} catch (JsonGenerationException ex) {

@@ -40,7 +40,7 @@ public class Graph {
     /**
      * Add edge to graph with given weight
      */
-    public boolean addEdge(Vertex one, Vertex two, int weight) {
+    public boolean addEdge(Vertex one, Vertex two, int weight, boolean convert) {
     	
         if(one.equals(two)){
             return false;  
@@ -53,7 +53,7 @@ public class Graph {
         }
         //and that the Edge isn't already incident to one of the vertices
         
-        else if(one.containsNeighbor(e) || two.containsNeighbor(e)){
+        else if((one.containsNeighbor(e) || two.containsNeighbor(e)) && !convert){
             return false;
         }  
         edges.put(e.hashCode(), e);

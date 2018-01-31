@@ -27,7 +27,6 @@ public class Start {
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException{
 		 String filename = "graph.txt";
 		 Graph graph = ProcessFile.processFile(filename, matrixType, commaSeparator, "");
-//		 ObjectToJson.convertObjectToJson("D:\\saved\\", filename,  graph);
 		 runKernighanLin(graph);	 
 		 runFiducciaMattheyses(graph);	
 		 runNaiveApproach(graph);

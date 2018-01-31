@@ -6,6 +6,8 @@ import entity.Edge;
 import entity.Graph;
 import entity.Vertex;
 import entity.VertexGroup;
+import helpers.VertexGroupToGraphConverter;
+import jsonConverter.ObjectToJson;
 
 /**
  * Kernighan-Lin - splitting a graph into 
@@ -28,11 +30,19 @@ public class KernighanLinAlgorithm implements IKernighanLinAlgorithm {
   /** Performs KerninghanLin on the given graph **/
   public KernighanLinAlgorithm(Graph g) {
 	  	processGraph(g);
+	  	
 		System.out.println("Kernighan Lin Algorithm");
 		System.out.println("Cluster 1");
 		System.out.println(getGroupA());
+		VertexGroupToGraphConverter.convertVertexGroupToGraph(partitionA);
 		System.out.println("Cluster 2");
 		System.out.println(getGroupB());
+	  	Graph partitionAGraph = VertexGroupToGraphConverter.convertVertexGroupToGraph(partitionA);	
+	  	ObjectToJson.convertObjectToJson("D:\\saved\\", "partitionA.json", partitionAGraph);
+	  	Graph partitionBGraph = VertexGroupToGraphConverter.convertVertexGroupToGraph(partitionB);
+	  	ObjectToJson.convertObjectToJson("D:\\saved\\", "partitionB.json", partitionBGraph);
+
+	  
   }
   
   public void processGraph(Graph g) {
