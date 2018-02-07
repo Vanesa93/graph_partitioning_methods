@@ -19,14 +19,14 @@ import jsonConverter.ObjectToJson;
 
 public class Start {
 
-	static String matrixType = "matrix";
-	static String rowType = "row";
-	static String spaceSeparator = "space";
-	static String commaSeparator = "comma";
+	static String matrixType = new String("matrix");
+	static String rowType = new String("row");
+	static String spaceSeparator = new String("space");
+	static String commaSeparator = new String("comma");
 	
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException{
-		 String filename = "graph.txt";
-		 Graph graph = ProcessFile.processFile(filename, matrixType, commaSeparator, "");
+		 String filename = "gC.txt";
+		 Graph graph = ProcessFile.processFile(filename, matrixType, spaceSeparator, "");
 		 runKernighanLin(graph);	 
 		 runFiducciaMattheyses(graph);	
 		 runNaiveApproach(graph);

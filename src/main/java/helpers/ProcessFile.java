@@ -19,10 +19,10 @@ import entity.Vertex;
 public class ProcessFile {
 
 	private static BufferedReader br;
-	static String matrixType = "matrix";
-	static String rowType = "row";
-	static String spaceSeparator = "space";
-	static String commaSeparator = "comma";
+	static String matrixType = new String("matrix");
+	static String rowType = new String("row");
+	static String spaceSeparator = new String("space");
+	static String commaSeparator = new String("comma");
 	
 	public static Graph processFile(String filename, String type, String separator,  String path) {
 		Graph graph = new Graph();
@@ -33,11 +33,12 @@ public class ProcessFile {
 			br = new BufferedReader(new FileReader(path));
 			String line = br.readLine();
 			String[] tokens = null;
-			if(type == matrixType) {
+			if(type.equalsIgnoreCase(matrixType)) {
 				String[] verticesNames = null;
 				if (line != null) {
-					if(separator == spaceSeparator) verticesNames = line.split(" ");
-					else if(separator == commaSeparator){
+					if(separator.equalsIgnoreCase(spaceSeparator)) {
+						verticesNames = line.split(" ");
+					} else if(separator.equalsIgnoreCase(commaSeparator)){
 						String currentline = line.replaceAll("\\s+","");
 						verticesNames = currentline.split(",");
 					}
@@ -48,9 +49,9 @@ public class ProcessFile {
 					}
 					int currentVertex = 0;
 					while (line != null) {
-						if(separator == spaceSeparator){
+						if(separator.equalsIgnoreCase(spaceSeparator)){
 							tokens = line.split(" ");
-						} else if(separator == commaSeparator){
+						} else if(separator.equalsIgnoreCase(commaSeparator)){
 							String currentline = line.replaceAll("\\s+","");
 							tokens = currentline.split(",");
 						}
@@ -65,7 +66,7 @@ public class ProcessFile {
 					}
 				}
 				br.close();
-			} else if(type == rowType) {
+			} else if(type.equalsIgnoreCase(rowType)) {
 				int y = 0;
 				int label = 0;
 				while(line!=null) {

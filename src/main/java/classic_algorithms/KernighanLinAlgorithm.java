@@ -34,15 +34,8 @@ public class KernighanLinAlgorithm implements IKernighanLinAlgorithm {
 		System.out.println("Kernighan Lin Algorithm");
 		System.out.println("Cluster 1");
 		System.out.println(getGroupA());
-		VertexGroupToGraphConverter.convertVertexGroupToGraph(partitionA);
 		System.out.println("Cluster 2");
-		System.out.println(getGroupB());
-	  	Graph partitionAGraph = VertexGroupToGraphConverter.convertVertexGroupToGraph(partitionA);	
-	  	ObjectToJson.convertObjectToJson("D:\\saved\\", "partitionA.json", partitionAGraph);
-	  	Graph partitionBGraph = VertexGroupToGraphConverter.convertVertexGroupToGraph(partitionB);
-	  	ObjectToJson.convertObjectToJson("D:\\saved\\", "partitionB.json", partitionBGraph);
-
-	  
+		System.out.println(getGroupB());  
   }
   
   public void processGraph(Graph g) {

@@ -1,8 +1,11 @@
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\classic_algorithms\IFiducciaMattheysesAlgorithm.java
+D:\WorkspaceEclipse\graphPartitioning\src\main\java\helpers\VertexGroupToGraphConverter.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\helpers\ProcessFile.java
+D:\WorkspaceEclipse\graphPartitioning\src\main\java\jsonConverter\JsonGraph.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\evolutionary_approach\IEvolution.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\evolutionary_approach\EvolutionaryApproach.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\entity\Individual.java
+D:\WorkspaceEclipse\graphPartitioning\src\main\java\jsonConverter\EdgesProperties.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\naive_approach\NaiveApproach.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\entity\Edge.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\evolutionary_approach\Evolution.java
@@ -15,5 +18,7 @@ D:\WorkspaceEclipse\graphPartitioning\src\main\java\entity\Vertex.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\evolutionary_approach\IEvolutionaryApproach.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\evolutionary_approach\IEvolutionaryFiducciaMattheysesAlgorithm.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\classic_algorithms\FiducciaMattheysesAlgorithm.java
+D:\WorkspaceEclipse\graphPartitioning\src\main\java\jsonConverter\ObjectToJson.java
+D:\WorkspaceEclipse\graphPartitioning\src\main\java\jsonConverter\VertexProperties.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\naive_approach\INaiveApproach.java
 D:\WorkspaceEclipse\graphPartitioning\src\main\java\entity\VertexGroup.java
