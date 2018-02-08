@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * An implentation of the Graph Vertex
@@ -17,6 +18,8 @@ public class Vertex {
     public Integer name;
     public double cost;
     public boolean visited;
+    public Integer x;
+    public Integer y;
   
    /**
      *
@@ -36,7 +39,15 @@ public class Vertex {
         this.neighborhood = new ArrayList<Edge>();
         this.neighborhoodVertices = new ArrayList<Vertex>();
         this.visited = false;
+        this.x = getRandomPosition();
+        this.y = getRandomPosition();
      }
+    
+    private Integer getRandomPosition() {
+ 	   Random rand = new Random(); 
+ 	   return rand.nextInt(500); 
+    }
+    
    
     /**
      * @param edge The edge to add

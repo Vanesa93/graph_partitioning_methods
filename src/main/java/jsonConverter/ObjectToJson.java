@@ -17,15 +17,13 @@ import entity.Vertex;
 public class ObjectToJson {	
 	
 	public static void convertObjectToJson(String pathToSave, String filename, Graph graph) {
-		try {
-			int verticesCount = graph.getVertices().size();
-			
+		try {	
 			ObjectMapper mapperObj = new ObjectMapper();			
 			ArrayList<VertexProperties> verticesList = new ArrayList<VertexProperties>();
 			ArrayList<EdgesProperties> edgesList = new ArrayList<EdgesProperties>();
 			
 			for(Vertex v : graph.getVertices()){
-				verticesList.add(new VertexProperties(v.getLabel().toString(), v.getLabel().toString(), verticesCount));
+				verticesList.add(new VertexProperties(v.getLabel().toString(), v.getLabel().toString(), v.x, v.y));
 			 }
 			
 			Integer edgeId = 0;
