@@ -7,7 +7,7 @@ import entity.Graph;
 import entity.Vertex;
 import entity.VertexGroup;
 
-public class VertexGroupToGraphConverter {
+public class VertexGroupToGraphConverterService {
 
 	public static Graph convertVertexGroupToGraph(VertexGroup vertexGroup) {
 		

@@ -16,7 +16,7 @@ import entity.Vertex;
  *
  */
 
-public class ProcessFile {
+public class ProcessFileService {
 
 	private static BufferedReader br;
 	static String matrixType = new String("matrix");

@@ -14,8 +14,8 @@ import classic_algorithms.KernighanLinAlgorithm;
 import entity.Graph;
 import evolutionary_approach.EvolutionaryApproach;
 import naive_approach.NaiveApproach;
-import helpers.ProcessFile;
-import jsonConverter.ObjectToJson;
+import helpers.ProcessFileService;
+import jsonConverter.ObjectToJsonService;
 
 public class Start {
 
@@ -25,11 +25,11 @@ public class Start {
 	static String commaSeparator = new String("comma");
 	
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException{
-		 String filename = "gC.txt";
-		 Graph graph = ProcessFile.processFile(filename, matrixType, spaceSeparator, "");
-		 runKernighanLin(graph);	 
-		 runFiducciaMattheyses(graph);	
-		 runNaiveApproach(graph);
+		 String filename = "NewYorkData.txt";
+		 Graph graph = ProcessFileService.processFile(filename, rowType, spaceSeparator, "");
+//		 runKernighanLin(graph);	 
+//		 runFiducciaMattheyses(graph);	
+//		 runNaiveApproach(graph);
 		 runEvolution(graph);
 		 graph = null;
 	 }  
@@ -72,7 +72,7 @@ public class Start {
 		 long usedMemoryBefore = runtime.totalMemory() - runtime.freeMemory();
 		 System.out.println("Used Memory before" + usedMemoryBefore);
 		 long startTimeRE = System.currentTimeMillis();
-		 new EvolutionaryApproach(graph);
+		 new EvolutionaryApproach(graph, null);
 		 long endTimeRE = System.currentTimeMillis();
 		 System.out.print(" \n");
 		 double time_seconds = (endTimeRE-startTimeRE) / 1000.0;   // add the decimal

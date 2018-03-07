@@ -39,7 +39,7 @@ public class NaiveApproach implements INaiveApproach
 	
 
     
-    /** Performs KerninghanLin on the given graph **/
+    /** Performs Naive approach on the given graph **/
     public NaiveApproach(Graph g) throws IOException {
   	  	processGraph(g);
 		System.out.println("Naive Approach");
@@ -108,7 +108,7 @@ public class NaiveApproach implements INaiveApproach
 	        first.clear();
 	        second.clear();
 	    }	    
-	    createFile("allPartitions", output);
+//	    createFile("allPartitions", output);
 	    if(additional != null) {
 		    graph.removeVertex(additional.label);
 	    }

@@ -14,7 +14,7 @@ import entity.Edge;
 import entity.Graph;
 import entity.Vertex;
 
-public class ObjectToJson {	
+public class ObjectToJsonService {	
 	
 	public static void convertObjectToJson(String pathToSave, String filename, Graph graph) {
 		try {	

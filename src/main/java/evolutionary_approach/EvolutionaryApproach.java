@@ -18,15 +18,15 @@ public class EvolutionaryApproach implements IEvolutionaryApproach{
     private Graph graph;
 	private int populationSize;
 	private int verticesCount;
-	private int maxGeneration;
+	private Integer maxGeneration;
 	public VertexGroup partition1;
 	public VertexGroup partition2;
     int max = -99999;                   // Max fitness of a generation
     int min = 99999;                    // Min fitness of a generation
     double mean = 0.0;                  // Mean fitness of a generation
     
-	public EvolutionaryApproach(Graph g){
-        processGraph(g);
+	public EvolutionaryApproach(Graph g, Integer epochs){
+        processGraph(g, epochs);
     	System.out.print("Evolutionary Fiduccia Mattheysis algorithm");
         System.out.print(" \n");
         System.out.print("CLuster 1");
@@ -38,8 +38,16 @@ public class EvolutionaryApproach implements IEvolutionaryApproach{
         System.out.print(partition2);
     }
 
+	public Integer getMaxGeneration() {
+		return this.maxGeneration;
+	}
+	
+	public void setMaxGeneration(Integer epochs) {
+		this.maxGeneration = epochs;
+	}
+	
     /**  Methods to run EC with KLFM-initialization **/ 
-    public void processGraph(Graph g){
+    public void processGraph(Graph g, Integer epochs){
     	graph = g;
     	verticesCount = graph.getVertices().size();        
     	// size of population
@@ -49,8 +57,8 @@ public class EvolutionaryApproach implements IEvolutionaryApproach{
 //        int max = -99999;                   // Max fitness of a generation
 //        int min = 99999;                    // Min fitness of a generation
 //        double mean = 0.0;                  // Mean fitness of a generation
-    	 // maximum generation to evolve   	
-    	maxGeneration = 100;          
+    	 // maximum generation to evolve   
+    	maxGeneration = (epochs != null) ? epochs : 10;  
         // number of Fiduccia Mattheyses locally
         int inFM = 0;                  
         // total number of Fiduccia Mattheyses
@@ -67,7 +75,7 @@ public class EvolutionaryApproach implements IEvolutionaryApproach{
         while((generation <  maxGeneration) && // not reached the maximum generation
         	 (mean!=(double)max))              // Population are not converged 
         {
-            Evolution evolution = new Evolution();
+            EvolutionService evolution = new EvolutionService();
             // Random selection
             Individual[] parents = evolution.randomSelection(population);
             // Generate off-spring with uniform crossover

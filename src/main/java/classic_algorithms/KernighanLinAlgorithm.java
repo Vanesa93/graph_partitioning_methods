@@ -6,8 +6,8 @@ import entity.Edge;
 import entity.Graph;
 import entity.Vertex;
 import entity.VertexGroup;
-import helpers.VertexGroupToGraphConverter;
-import jsonConverter.ObjectToJson;
+import helpers.VertexGroupToGraphConverterService;
+import jsonConverter.ObjectToJsonService;
 
 /**
  * Kernighan-Lin - splitting a graph into 

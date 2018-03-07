@@ -16,7 +16,7 @@ import entity.VertexGroup;
 
 public interface IEvolutionaryApproach{
     
-    void processGraph(Graph g);
+    void processGraph(Graph g, Integer epochs);
     Individual iterateKLFM(final Individual ind);
     int sumArray(int[] a);
     void showArray(int[] a);              

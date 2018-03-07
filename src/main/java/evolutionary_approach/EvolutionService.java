@@ -13,7 +13,7 @@ import entity.Individual;
  *
  */
 
-public class Evolution implements IEvolution{
+public class EvolutionService implements IEvolution{
 
 	// Selection
     /** Randomly Select 2 parents from the given population **/
