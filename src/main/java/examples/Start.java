@@ -25,11 +25,11 @@ public class Start {
 	static String commaSeparator = new String("comma");
 	
 	public static void main(String[] args) throws JsonGenerationException, JsonMappingException, IOException{
-		 String filename = "NewYorkData.txt";
-		 Graph graph = ProcessFileService.processFile(filename, rowType, spaceSeparator, "");
-//		 runKernighanLin(graph);	 
-//		 runFiducciaMattheyses(graph);	
-//		 runNaiveApproach(graph);
+		 String filename = "graph.txt";
+		 Graph graph = ProcessFileService.processFile(filename, matrixType, commaSeparator, "");
+		 runKernighanLin(graph);	 
+		 runFiducciaMattheyses(graph);	
+		 runNaiveApproach(graph);
 		 runEvolution(graph);
 		 graph = null;
 	 }  
